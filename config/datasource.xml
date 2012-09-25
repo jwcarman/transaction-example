@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <service ref="dataSource" interface="javax.sql.DataSource">
+        <service-properties>
+            <entry key="databaseName" value="EXAMPLE" />
+        </service-properties>
+    </service>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+        <!--
+          Connection Properties
+        -->
+        <property name="url" value="jdbc:hsqldb:data/example-eb" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
+        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver" />
+
+        <!--
+            Abandoned Connection Handling
+        -->
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="300" />
+        <property name="logAbandoned" value="true" />
+
+        <!--
+          Pool Size
+        -->
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="10" />
+        <property name="minIdle" value="5" />
+        <property name="maxIdle" value="10" />
+        <property name="maxWait" value="5000" />
+
+        <!--
+          Prepared Statement Pooling
+        -->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxOpenPreparedStatements" value="100" />
+
+        <!--
+          Idle Connection Eviction
+        -->
+        <property name="timeBetweenEvictionRunsMillis" value="-1" />
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="numTestsPerEvictionRun" value="5" />
+
+        <!--
+          Connection Validation
+        -->
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+        <property name="testWhileIdle" value="false"/>
+        <property name="validationQuery" value="select 1" />
+        <property name="validationQueryTimeout" value="-1" />
+    </bean>
+</blueprint>
