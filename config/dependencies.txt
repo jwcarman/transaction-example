@@ -9,3 +9,4 @@ install -s mvn:org.apache.openjpa/openjpa/2.2.0
 install -s mvn:org.domdrides/domdrides-core/1.5
 install -s mvn:org.hsqldb/hsqldb/2.2.8
 install -s mvn:com.gafri.example/transaction-example/1.0-SNAPSHOT
+

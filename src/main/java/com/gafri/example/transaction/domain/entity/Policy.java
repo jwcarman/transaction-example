@@ -2,10 +2,13 @@ package com.gafri.example.transaction.domain.entity;
 
 import org.domdrides.entity.UuidEntity;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.StringWriter;
 
 @Entity
 @XmlRootElement
@@ -22,6 +25,7 @@ public class Policy extends UuidEntity
 // Getter/Setter Methods
 //----------------------------------------------------------------------------------------------------------------------
 
+    @Basic
     public String getPolicyNumber()
     {
         return policyNumber;
@@ -30,5 +34,14 @@ public class Policy extends UuidEntity
     public void setPolicyNumber(String policyNumber)
     {
         this.policyNumber = policyNumber;
+    }
+
+    public static void main(String[] args)
+    {
+        StringWriter sw = new StringWriter();
+        Policy policy = new Policy();
+        policy.setPolicyNumber("12345");
+        JAXB.marshal(policy, sw);
+        System.out.println(sw.toString());
     }
 }

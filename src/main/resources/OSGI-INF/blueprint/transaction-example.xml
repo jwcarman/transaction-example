@@ -11,10 +11,11 @@
 
     <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <jpa:unit property="entityManagerFactory" unitname="example"/>
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <reference id="dataSource" interface="javax.sql.DataSource" filter="(databaseName=EXAMPLE)" availability="mandatory" />
+    <reference id="dataSource" interface="javax.sql.DataSource" filter="(databaseName=EXAMPLE)"
+               availability="mandatory"/>
 
     <!--
     JMS Configuration
@@ -22,7 +23,7 @@
     <reference id="connectionFactory" interface="javax.jms.ConnectionFactory" availability="mandatory"/>
 
     <bean id="jmsTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
-        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="connectionFactory" ref="connectionFactory"/>
     </bean>
 
     <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
@@ -35,13 +36,17 @@
     Camel Configuration
     -->
     <camelContext id="blueprintContext" xmlns="http://camel.apache.org/schema/blueprint">
-        <routeBuilder ref="newPolicyRoute" />
+        <routeBuilder ref="newPolicyRoute"/>
+        <route id="fileInput">
+            <from uri="file:data/inbox/policy" />
+            <to uri="jms:queue:ADD_POLICY" />
+        </route>
     </camelContext>
 
-    <bean id="newPolicyRoute" class="com.gafri.example.transaction.route.NewPolicyRouteBuilder" />
+    <bean id="newPolicyRoute" class="com.gafri.example.transaction.route.NewPolicyRouteBuilder"/>
 
     <bean id="TX_REQUIRED" class="org.apache.camel.spring.spi.SpringTransactionPolicy">
-        <property name="transactionManager" ref="jpaTransactionManager" />
+        <property name="transactionManager" ref="jpaTransactionManager"/>
     </bean>
 
 </blueprint>
