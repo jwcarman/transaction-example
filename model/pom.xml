@@ -21,6 +21,11 @@
             <version>1.5</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.openjpa</groupId>
+            <artifactId>openjpa</artifactId>
+            <version>${openjpa.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jpa_2.0_spec</artifactId>
             <version>1.1</version>
@@ -34,6 +39,13 @@
         </dependency>
 
         <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -76,7 +88,7 @@
                     <execution>
                         <id>enhancer</id>
                         <phase>
-                            prepare-package
+                            process-classes
                         </phase>
                         <goals>
                             <goal>enhance</goal>

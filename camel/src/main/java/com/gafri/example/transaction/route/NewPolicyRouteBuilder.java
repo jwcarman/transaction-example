@@ -14,9 +14,9 @@ public class NewPolicyRouteBuilder extends RouteBuilder
     {
         JaxbDataFormat format = new JaxbDataFormat(JAXBContext.newInstance(Policy.class));
         from("jms:queue:ADD_POLICY").id("new-policy")
-                //.transacted("TX_REQUIRED")
+                .transacted("TX_REQUIRED")
                 .unmarshal(format)
-                //.beanRef("policyRepository", "add")
+                .beanRef("policyRepository", "add")
                 .marshal(format)
                 .to("jms:queue:POLICY_EVENT");
     }

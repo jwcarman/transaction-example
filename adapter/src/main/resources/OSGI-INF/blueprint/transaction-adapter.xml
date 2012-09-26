@@ -17,7 +17,7 @@
     <!--
     Implementation Beans
     -->
-    <bean id="policyRepository" class="com.gafri.example.transaction.domain.repository.impl.JpaPolicyRepository">
+    <bean id="policyRepository" class="com.gafri.example.transaction.domain.repository.impl.JpaPolicyRepository" activation="eager">
         <jpa:unit property="entityManagerFactory" unitname="EXAMPLE"/>
     </bean>
 
